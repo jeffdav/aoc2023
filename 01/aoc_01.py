@@ -29,11 +29,10 @@ def part2():
       while i < len(line):
         if line[i] in nums:
           line_nums.append(int(line[i]))
-          i += 1
-          continue
-        for key in alpha_nums.keys():
-          if line[i:].startswith(key):
-            line_nums.append(alpha_nums[key])
+        else:
+          for key in alpha_nums.keys():
+            if line[i:].startswith(key):
+              line_nums.append(alpha_nums[key])
         i += 1
 
       ref_nums = [line_nums[0], line_nums[len(line_nums) - 1]]
