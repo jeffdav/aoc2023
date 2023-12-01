@@ -25,15 +25,13 @@ def part2():
     for line in lines:
       line_nums = []
       line = line.rstrip()
-      i = 0
-      while i < len(line):
+      for i in range(len(line)):
         if line[i] in nums:
           line_nums.append(int(line[i]))
         else:
           for key in alpha_nums.keys():
             if line[i:].startswith(key):
               line_nums.append(alpha_nums[key])
-        i += 1
 
       ref_nums = [line_nums[0], line_nums[len(line_nums) - 1]]
       ref_num = 10 * int(ref_nums[0]) + int(ref_nums[1])
