@@ -1,7 +1,11 @@
 import re
 
+nums = "0123456789"
+alpha_nums = { "one": 1, "two": 2, "three": 3,
+                "four": 4, "five": 5, "six": 6,
+                "seven": 7, "eight": 8, "nine": 9 }
+
 def part1():
-  nums = "0123456789"
   sum = 0
 
   with open('input_01.txt', 'r') as file:
@@ -15,10 +19,6 @@ def part1():
     print("Part 1: " + str(sum))
 
 def part2():
-  nums = "0123456789"
-  alpha_nums = { "one": 1, "two": 2, "three": 3,
-                 "four": 4, "five": 5, "six": 6,
-                 "seven": 7, "eight": 8, "nine": 9 }
   sum = 0
 
   with open('input_01.txt', 'r') as file:
