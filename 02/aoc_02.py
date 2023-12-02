@@ -15,10 +15,8 @@ def part1():
         grab = grab.strip()
         colors = grab.split(',')
         for color in colors:
-          color = color.strip()
-          num = int(color.split(' ')[0])
-          c = color.split(' ')[1]
-          if (num > counts[c]):
+          num, c = color.strip().split(' ')
+          if (int(num) > counts[c]):
             valid = False
             break
 
