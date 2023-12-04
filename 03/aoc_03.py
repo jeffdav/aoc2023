@@ -47,7 +47,7 @@ def part1():
 
 def find_number(line, i):
   start = i
-  while start >= 0 and line[start - 1].isdigit():
+  while start > 0 and line[start - 1].isdigit():
     start -= 1
 
   end = i
@@ -94,10 +94,7 @@ def part2():
                 nums.append(find_number(next_line, i+1))
 
           if len(nums) == 2:
-            print("YES: " + str(nums))
             sum += (nums[0] * nums[1])
-          else:
-            print("NO: " + str(nums))
           nums = []
         i += 1
       line_num += 1
