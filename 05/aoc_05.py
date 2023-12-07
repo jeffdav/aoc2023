@@ -1,6 +1,7 @@
 import sys
 from typing import Any
 import time
+from datetime import datetime
 
 class RangeMap:
   def __init__(self, src_start, dest_start, length):
@@ -59,9 +60,7 @@ def part1():
           print("mapping: {} to {}".format(source, dest))
           key = dest
           range_mapper = map_map[(source, dest)]
-          print("inputs: {}".format(output))
           output = [range_mapper.map_number(o) for o in output]
-          print("outputs: {}".format(output))
 
   print("Part 1: " + str(min(output)))
 
@@ -98,25 +97,23 @@ def part2():
     curr_min = sys.maxsize
     seed_num = 0
     while seed_num < len(seeds):
-      print("expanding: {} to {} (len = {})".format(seeds[seed_num], seeds[seed_num] + seeds[seed_num + 1], seeds[seed_num + 1]))
-      seeds_expanded = []
-      seeds_expanded += range(seeds[seed_num], seeds[seed_num] + seeds[seed_num + 1])
-      # print ("expanded: {}".format(seeds_expanded))
+      start = seeds[seed_num]
+      length = seeds[seed_num + 1]
+      seed_range = range(start, start + length)
+      print("mapping: ({:,}, {:,})".format(seed_range[0], seed_range[-1]))
 
-
-      key = "seed"
-      output = seeds_expanded
-      while key != "location":
-        for ((source, dest)) in map_map.keys():
-          if source == key:
-            print("[{}] mapping: {} to {}".format(time.time(), source, dest))
-            key = dest
-            range_mapper = map_map[(source, dest)]
-            # print("inputs: {}".format(output))
-            output = [range_mapper.map_number(o) for o in output]
-            # print("outputs: {}".format(output))
-
-      curr_min = min(curr_min, min(output))
+      for i in seed_range:
+        key = "seed"
+        output = i
+        while key != "location":
+          for ((source, dest)) in map_map.keys():
+            if source == key:
+              key = dest
+              range_mapper = map_map[(source, dest)]
+              output = range_mapper.map_number(output)
+        curr_min = min(curr_min, output)
+        if i % 10000000 == 0:
+          print("[{}] - [{:.0%}]: curr_min: {:,}".format(datetime.now(), (i-start)/length, curr_min))
       seed_num += 2
 
   print("Part 2: " + str(curr_min))
